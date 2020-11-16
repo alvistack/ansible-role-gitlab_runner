@@ -24,4 +24,6 @@ _apt_repository:
     state: "present"
 
 _apt:
-  - { state: "present", name: "gitlab-runner" }
+  - { state: "latest", name: "ca-certificates" }
+  - { state: "latest", name: "gitlab-runner" }
+  - { state: "latest", name: "openssh-client" }
