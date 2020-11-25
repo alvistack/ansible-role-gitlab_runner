@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Migrate from Travis CI to GitLab CI
 ## 4.5.0 - 2020-11-16
 
   - Ininitial release for Ansible 2.10 or higher
