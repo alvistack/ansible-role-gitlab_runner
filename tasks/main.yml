@@ -83,10 +83,6 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/gitlab-runner/config.toml" }
-    - { dest: "/home/gitlab-runner/bin/cleanup.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
-    - { dest: "/home/gitlab-runner/bin/config.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
-    - { dest: "/home/gitlab-runner/bin/prepare.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
-    - { dest: "/home/gitlab-runner/bin/run.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
 
 - name: prepare files
   file:
@@ -97,10 +93,6 @@
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "/etc/gitlab-runner/config.toml" }
-    - { dest: "/home/gitlab-runner/bin/cleanup.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
-    - { dest: "/home/gitlab-runner/bin/config.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
-    - { dest: "/home/gitlab-runner/bin/prepare.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
-    - { dest: "/home/gitlab-runner/bin/run.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
 
 - name: flush handlers
   meta: flush_handlers

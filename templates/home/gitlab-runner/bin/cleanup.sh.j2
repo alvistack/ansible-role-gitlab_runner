@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# {{ ansible_managed }}
-
-set -ex
-
-HOSTNAME="$(cat HOSTNAME)"
-
-docker rm --force ${HOSTNAME}
