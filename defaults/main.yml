@@ -23,7 +23,7 @@ gitlab_runner_concurrent = 1
 gitlab_runner_check_interval = 0
 
 # The Runner’s description, just informatory.
-gitlab_runner_runners_name = "{{ hostvars[ansible_play_hosts[0]].ansible_machine_id | to_uuid }}"
+gitlab_runner_runners_name = "alvistack/gitlab-runner:latest"
 
 # GitLab URL.
 gitlab_runner_runners_url = "https://gitlab.com/"
