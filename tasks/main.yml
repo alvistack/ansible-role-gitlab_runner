@@ -72,7 +72,7 @@
     - { dest: "/etc/gitlab-runner" }
     - { dest: "/home/gitlab-runner", owner: "gitlab-runner", group: "gitlab-runner" }
     - { dest: "/home/gitlab-runner/bin", owner: "gitlab-runner", group: "gitlab-runner" }
-    - { dest: "/var/cache/gitlab-runner", owner: "gitlab-runner", group: "gitlab-runner" }
+    - { dest: "/var/cache/gitlab-runner", owner: "gitlab-runner", group: "gitlab-runner", mode: "1777" }
 
 - name: copy templates
   template:
