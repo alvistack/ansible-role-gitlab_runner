@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# {{ ansible_managed }}
+
+set -ex
+
+HOSTNAME="$(cat HOSTNAME)"
+
+docker exec -i ${HOSTNAME} bash < "${1}"
+
+if [ $? -ne 0 ]; then
+    exit $BUILD_FAILURE_EXIT_CODE
+fi

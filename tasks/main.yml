@@ -69,7 +69,38 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
+    - { dest: "/etc/gitlab-runner" }
     - { dest: "/home/gitlab-runner", owner: "gitlab-runner", group: "gitlab-runner" }
+    - { dest: "/home/gitlab-runner/bin", owner: "gitlab-runner", group: "gitlab-runner" }
+    - { dest: "/var/cache/gitlab-runner", owner: "gitlab-runner", group: "gitlab-runner" }
+
+- name: copy templates
+  template:
+    dest: "{{ item.dest }}"
+    src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  loop:
+    - { dest: "/etc/gitlab-runner/config.toml" }
+    - { dest: "/home/gitlab-runner/bin/cleanup.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
+    - { dest: "/home/gitlab-runner/bin/config.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
+    - { dest: "/home/gitlab-runner/bin/prepare.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
+    - { dest: "/home/gitlab-runner/bin/run.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
+
+- name: prepare files
+  file:
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+    state: "{{ item.state | default('file') }}"
+  loop:
+    - { dest: "/etc/gitlab-runner/config.toml" }
+    - { dest: "/home/gitlab-runner/bin/cleanup.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
+    - { dest: "/home/gitlab-runner/bin/config.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
+    - { dest: "/home/gitlab-runner/bin/prepare.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
+    - { dest: "/home/gitlab-runner/bin/run.sh", owner: "gitlab-runner", group: "gitlab-runner", mode: "0755" }
 
 - name: flush handlers
   meta: flush_handlers

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# {{ ansible_managed }}
+
+set -ex
+
+HOSTNAME="$(cat HOSTNAME)"
+
+docker run -itd \
+  --privileged \
+  --name ${HOSTNAME} \
+  --hostname ${HOSTNAME} \
+  --workdir /home/gitlab-runner \
+  --volume /root/.vagrant.d/boxes:/root/.vagrant.d/boxes \
+  --volume /var/cache/gitlab-runner:/var/cache/gitlab-runner \
+  --volume /var/lib/docker:/var/lib/docker \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --volume /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
+  {{ gitlab_runner_runners_custom_image }} bash

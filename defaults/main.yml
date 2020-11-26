@@ -13,3 +13,46 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# Limits how many jobs globally can be run concurrently. The most upper limit
+# of jobs using all defined runners. 0 does not mean unlimited.
+gitlab_runner_concurrent = 1
+
+# Defines the interval length, in seconds, between new jobs check. The
+# default value is 3; if set to 0 or lower, the default value will be used.
+gitlab_runner_check_interval = 0
+
+# The Runner’s description, just informatory.
+gitlab_runner_runners_name = "{{ hostvars[ansible_play_hosts[0]].ansible_machine_id | to_uuid }}"
+
+# GitLab URL.
+gitlab_runner_runners_url = "https://gitlab.com/"
+
+# The Runner’s special token (not to be confused with the registration token).
+gitlab_runner_runners_token = ~
+
+# Absolute path to a directory where builds will be stored in context of
+# selected executor (Locally, Docker, SSH).
+gitlab_runner_runners_builds_dir = "/home/gitlab-runner"
+
+# Absolute path to a directory where build caches will be stored in context
+# of selected executor (locally, Docker, SSH). If the docker executor is used,
+# this directory needs to be included in its volumes parameter.
+gitlab_runner_runners_cache_dir = "/var/cache/gitlab-runner"
+
+# Use this image to run builds.
+gitlab_runner_runners_custom_image = "alvistack/gitlab-runner:latest"
+
+# Path to an executable to allow the user to override some configuration
+# settings before the build starts.
+gitlab_runner_runners_custom_config_exec = "/home/gitlab-runner/bin/config.sh"
+
+# Path to an executable to prepare the environment.
+gitlab_runner_runners_custom_prepare_exec = "/home/gitlab-runner/bin/prepare.sh"
+
+# Path to an executable to run scripts in the environments. For example,
+# the clone and build script. 
+gitlab_runner_runners_custom_run_exec = "/home/gitlab-runner/bin/run.sh"
+
+# Path to an executable to clean up the environment.
+gitlab_runner_runners_custom_cleanup_exec = "/home/gitlab-runner/bin/cleanup.sh"

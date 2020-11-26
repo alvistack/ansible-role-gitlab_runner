@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# {{ ansible_managed }}
+
+set -ex
+
+HOSTNAME="runner-${CUSTOM_ENV_CI_RUNNER_ID}-concurrent-${CUSTOM_ENV_CI_CONCURRENT_ID}-project-${CUSTOM_ENV_CI_PROJECT_ID}-job-${CUSTOM_ENV_CI_JOB_ID}"
+echo ${HOMENAME} > HOSTNAME
+
+CI_JOB_URL="${CUSTOM_ENV_CI_JOB_URL}"
+echo ${CI_JOB_URL} > CI_JOB_URL
