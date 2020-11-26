@@ -7,9 +7,12 @@ set -ex
 HOSTNAME="$(cat HOSTNAME)"
 
 docker run -itd \
-  --privileged \
   --name ${HOSTNAME} \
   --hostname ${HOSTNAME} \
+  --cpus={{ gitlab_runner_runners_custom_cpus }} \
+  --memory={{ gitlab_runner_runners_custom_memory }} \
+  --memory-swap={{ gitlab_runner_runners_custom_memory_swap }} \
+  --privileged={{ gitlab_runner_runners_custom_privileged | bool }} \
   --workdir /home/gitlab-runner \
   --volume /root/.vagrant.d/boxes:/root/.vagrant.d/boxes \
   --volume /var/cache/gitlab-runner:/var/cache/gitlab-runner \
