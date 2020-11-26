@@ -64,6 +64,6 @@ gitlab_runner_runners_docker_devices:
 # Specify additional volumes that should be mounted (same syntax as Docker’s -v flag).
 gitlab_runner_runners_docker_volumes:
   - "/root/.vagrant.d/boxes:/root/.vagrant.d/boxes"
-  - "/var/cache/gitlab-runner:/var/cache/gitlab-runner"
   - "/var/run/docker.sock:/var/run/docker.sock"
   - "/var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock"
+  - "{{ gitlab_runner_runners_cache_dir }}"
