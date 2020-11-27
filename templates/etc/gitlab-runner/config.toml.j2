@@ -9,20 +9,12 @@ check_interval = {{ gitlab_runner_check_interval }}
 [[runners]]
   builds_dir = "{{ gitlab_runner_runners_builds_dir }}"
   cache_dir = "{{ gitlab_runner_runners_cache_dir }}"
-  executor = "docker"
+  executor = "custom"
   name = "{{ gitlab_runner_runners_name }}"
   token = "{{ gitlab_runner_runners_token }}"
   url = "{{ gitlab_runner_runners_url }}"
-  [runners.docker]
-    cpus = "{{ gitlab_runner_runners_docker_cpus }}"
-    devices = ["{{ gitlab_runner_runners_docker_devices | join('","') }}"]
-    disable_cache = false
-    disable_entrypoint_overwrite = false
-    image = "{{ gitlab_runner_runners_docker_image }}"
-    memory = "{{ gitlab_runner_runners_docker_memory }}"
-    memory_swap = "{{ gitlab_runner_runners_docker_memory_swap }}"
-    oom_kill_disable = false
-    privileged = {{ gitlab_runner_runners_docker_privileged | bool | lower }}
-    shm_size = 0
-    tls_verify = false
-    volumes = ["{{ gitlab_runner_runners_docker_volumes | join('","') }}"]
+  [runners.custom]
+    config_exec = "/opt/gitlab-runner/executors/vagrant/config.sh"
+    prepare_exec = "/opt/gitlab-runner/executors/vagrant/prepare.sh"
+    run_exec = "/opt/gitlab-runner/executors/vagrant/run.sh"
+    cleanup_exec = "/opt/gitlab-runner/executors/vagrant/cleanup.sh"

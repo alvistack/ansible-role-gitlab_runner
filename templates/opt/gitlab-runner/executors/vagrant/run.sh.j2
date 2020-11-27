@@ -1,4 +1,4 @@
----
+#!/bin/bash
 
 # (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
@@ -14,26 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: all
-  remote_user: root
-  become: true
-  tasks:
-    - include_role:
-        name: python
-      tags: python
+set -ex
 
-    - include_role:
-        name: git
-      tags: git
+ssh -F ssh_config -o ServerAliveInterval=300 default /bin/bash < "${1}"
 
-    - include_role:
-        name: vagrant
-      tags: vagrant
-
-    - include_role:
-        name: libvirt
-      tags: libvirt
-
-    - include_role:
-        name: gitlab_runner
-      tags: gitlab_runner
+if [ $? -ne 0 ]; then
+    exit $BUILD_FAILURE_EXIT_CODE
+fi

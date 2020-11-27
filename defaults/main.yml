@@ -33,37 +33,26 @@ gitlab_runner_runners_token: ~
 
 # Absolute path to a directory where builds will be stored in context of
 # selected executor (Locally, Docker, SSH).
-gitlab_runner_runners_builds_dir: "/home/gitlab-runner"
+gitlab_runner_runners_builds_dir: "/home/vagrant"
 
 # Absolute path to a directory where build caches will be stored in context
 # of selected executor (locally, Docker, SSH). If the docker executor is used,
 # this directory needs to be included in its volumes parameter.
-gitlab_runner_runners_cache_dir: "/var/cache/gitlab-runner"
+gitlab_runner_runners_cache_dir: "/home/vagrant/.cache"
 
 # Use this image to run builds.
-gitlab_runner_runners_docker_image: "alvistack/gitlab-runner:latest"
+gitlab_runner_runners_vagrant_image: "alvistack/gitlab-runner"
 
 # String value of number of CPUs (available in Docker 1.13 or later).
-gitlab_runner_runners_docker_cpus: "2"
+gitlab_runner_runners_vagrant_cpus: "4"
 
 # String value containing the memory limit.
-gitlab_runner_runners_docker_memory: "8192m"
+gitlab_runner_runners_vagrant_memory: "16384"
 
-# String value containing the total memory limit.
-gitlab_runner_runners_docker_memory_swap: "8192m"
+# Make container run in Nested mode.
+gitlab_runner_runners_vagrant_nested: true
 
-# Make container run in Privileged mode (insecure).
-gitlab_runner_runners_docker_privileged: true
-
-# Share additional host devices with the container.
-gitlab_runner_runners_docker_devices:
-  - "/dev/kvm"
-  - "/dev/net/tun"
-  - "/dev/vhost-net"
-
-# Specify additional volumes that should be mounted (same syntax as Docker’s -v flag).
-gitlab_runner_runners_docker_volumes:
-  - "/root/.vagrant.d/boxes:/root/.vagrant.d/boxes"
-  - "/var/run/docker.sock:/var/run/docker.sock"
-  - "/var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock"
-  - "{{ gitlab_runner_runners_cache_dir }}"
+# Specify additional volumes that should be mounted.
+gitlab_runner_runners_vagrant_synced_folders:
+  - { src: "/home/vagrant/.cache", dest: "/home/vagrant/.cache" }
+  - { src: "/home/vagrant/.vagrant.d/boxes", dest: "/home/vagrant/.vagrant.d/boxes" }

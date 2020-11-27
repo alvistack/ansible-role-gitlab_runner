@@ -39,3 +39,11 @@ roles:
   - name: git
     src: https://github.com/alvistack/ansible-role-git
     version: develop
+
+  - name: vagrant
+    src: https://github.com/alvistack/ansible-role-vagrant
+    version: develop
+
+  - name: libvirt
+    src: https://github.com/alvistack/ansible-role-libvirt
+    version: develop

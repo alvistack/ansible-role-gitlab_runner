@@ -70,9 +70,7 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/gitlab-runner" }
-    - { dest: "/home/gitlab-runner", owner: "gitlab-runner", group: "gitlab-runner" }
-    - { dest: "/home/gitlab-runner/bin", owner: "gitlab-runner", group: "gitlab-runner" }
-    - { dest: "/var/cache/gitlab-runner", owner: "gitlab-runner", group: "gitlab-runner", mode: "1777" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant" }
 
 - name: copy templates
   template:
@@ -83,6 +81,10 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/gitlab-runner/config.toml" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant/cleanup.sh", mode: "0755" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant/config.sh", mode: "0755" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant/prepare.sh", mode: "0755" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant/run.sh", mode: "0755" }
 
 - name: prepare files
   file:
@@ -93,6 +95,10 @@
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "/etc/gitlab-runner/config.toml" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant/cleanup.sh", mode: "0755" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant/config.sh", mode: "0755" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant/prepare.sh", mode: "0755" }
+    - { dest: "/opt/gitlab-runner/executors/vagrant/run.sh", mode: "0755" }
 
 - name: flush handlers
   meta: flush_handlers
