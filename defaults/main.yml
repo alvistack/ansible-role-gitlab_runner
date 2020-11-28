@@ -16,11 +16,11 @@
 
 # Limits how many jobs globally can be run concurrently. The most upper limit
 # of jobs using all defined runners. 0 does not mean unlimited.
-gitlab_runner_concurrent: 1
+gitlab_runner_concurrent: "1"
 
 # Defines the interval length, in seconds, between new jobs check. The
 # default value is 3; if set to 0 or lower, the default value will be used.
-gitlab_runner_check_interval: 0
+gitlab_runner_check_interval: "0"
 
 # The Runner’s description, just informatory.
 gitlab_runner_runners_name: "alvistack/gitlab-runner"
