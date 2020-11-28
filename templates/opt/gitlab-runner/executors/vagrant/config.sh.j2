@@ -44,6 +44,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision 'shell', inline: <<-SHELL
     apt-get update
+    apt-get dist-upgrade -y
     apt-get install -y git git-lfs
     mkdir -p {{ gitlab_runner_runners_builds_dir }}
     chown -Rf vagrant:vagrant {{ gitlab_runner_runners_builds_dir }}
