@@ -45,22 +45,6 @@
         - "."
   ignore_errors: true
 
-- name: groupadd
-  group:
-    name: "gitlab-runner"
-    system: true
-    state: "present"
-
-- name: useradd
-  user:
-    name: "gitlab-runner"
-    group: "gitlab-runner"
-    home: "/home/gitlab-runner"
-    shell: "/bin/bash"
-    system: true
-    create_home: false
-    state: "present"
-
 - name: prepare directories
   file:
     dest: "{{ item.dest }}"
@@ -70,7 +54,10 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/gitlab-runner" }
+    - { dest: "/lib/systemd/system" }
     - { dest: "/opt/gitlab-runner/executors/vagrant" }
+    - { dest: "{{ gitlab_runner_runners_cache_dir }}", owner: "vagrant", group: "vagrant" }
+    - { dest: "{{ gitlab_runner_runners_vagrant_boxes_dir }}", owner: "vagrant", group: "vagrant" }
 
 - name: copy templates
   template:
@@ -81,10 +68,14 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/gitlab-runner/config.toml" }
+    - { dest: "/lib/systemd/system/gitlab-runner.service" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/cleanup.sh", mode: "0755" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/config.sh", mode: "0755" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/prepare.sh", mode: "0755" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/run.sh", mode: "0755" }
+  notify:
+    - gitlab_runner | systemctl daemon-reload
+    - gitlab_runner | systemctl restart gitlab-runner.service
 
 - name: prepare files
   file:
@@ -95,10 +86,15 @@
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "/etc/gitlab-runner/config.toml" }
+    - { dest: "/etc/systemd/system/gitlab-runner.service", state: "absent" }
+    - { dest: "/lib/systemd/system/gitlab-runner.service" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/cleanup.sh", mode: "0755" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/config.sh", mode: "0755" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/prepare.sh", mode: "0755" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/run.sh", mode: "0755" }
+  notify:
+    - gitlab_runner | systemctl daemon-reload
+    - gitlab_runner | systemctl restart gitlab-runner.service
 
 - name: flush handlers
   meta: flush_handlers

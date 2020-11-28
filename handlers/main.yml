@@ -14,6 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: gitlab_runner | systemctl daemon-reload
+  systemd:
+    daemon_reload: true
+  changed_when: false
+  ignore_errors: true
+
 - name: gitlab_runner | systemctl restart gitlab-runner.service
   service:
     name: "gitlab-runner.service"

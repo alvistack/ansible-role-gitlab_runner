@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# {{ ansible_managed }}
+
 # (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,35 +18,44 @@
 
 set -ex
 
-HOSTNAME="runner-${CUSTOM_ENV_CI_RUNNER_ID}-project-${CUSTOM_ENV_CI_PROJECT_ID}-concurrent-${CUSTOM_ENV_CI_CONCURRENT_PROJECT_ID}"
-echo ${HOSTNAME} > HOSTNAME
+VM_HOSTNAME="${VM_HOSTNAME:-"runner-${CUSTOM_ENV_CI_RUNNER_ID}-project-${CUSTOM_ENV_CI_PROJECT_ID}-concurrent-${CUSTOM_ENV_CI_CONCURRENT_PROJECT_ID}"}"
+echo ${VM_HOSTNAME} > VM_HOSTNAME
 
-CI_JOB_URL="${CUSTOM_ENV_CI_JOB_URL}"
+CI_JOB_URL="${CI_JOB_URL:-"${CUSTOM_ENV_CI_JOB_URL}"}"
 echo ${CI_JOB_URL} > CI_JOB_URL
 
 cat > Vagrantfile <<EOF
 Vagrant.configure("2") do |config|
-  config.vm.define '${HOSTNAME}' do |instance|
-    instance.vm.hostname = '${HOSTNAME}'
-    instance.vm.box = '{{ gitlab_runner_runners_vagrant_image }}'
-  end
+  config.vm.hostname = '${VM_HOSTNAME}'
+  config.vm.box = '{{ gitlab_runner_runners_vagrant_image }}'
   
   config.vm.provider :libvirt do |libvirt|
+    libvirt.cpu_mode = 'host-model'
     libvirt.cpus = {{ gitlab_runner_runners_vagrant_cpus }}
+    libvirt.disk_bus = 'virtio'
+    libvirt.management_network_address = '{{ gitlab_runner_runners_vagrant_management_network_address }}'
+    libvirt.management_network_name = '{{ gitlab_runner_runners_vagrant_management_network_name }}'
     libvirt.memory = {{ gitlab_runner_runners_vagrant_memory }}
     libvirt.nested = {{ gitlab_runner_runners_vagrant_nested | bool | lower }}
-    libvirt.cpu_mode = 'host-model'
+    libvirt.nic_model_type = 'virtio'
+    libvirt.video_type = 'virtio'
+    libvirt.volume_cache = 'none'
   end
-  
+
   config.vm.provision 'shell', inline: <<-SHELL
-    sudo apt-get update
-    sudo apt-get install -y git git-lfs
-    sudo chown -Rf vagrant:vagrant {{ gitlab_runner_runners_builds_dir }}
-    sudo chown -Rf vagrant:vagrant {{ gitlab_runner_runners_cache_dir }}
+    apt-get update
+    apt-get install -y git git-lfs
+    mkdir -p {{ gitlab_runner_runners_builds_dir }}
+    chown -Rf vagrant:vagrant {{ gitlab_runner_runners_builds_dir }}
+    mkdir -p {{ gitlab_runner_runners_cache_dir }}
+    chown -Rf vagrant:vagrant {{ gitlab_runner_runners_cache_dir }}
+    mkdir -p {{ gitlab_runner_runners_vagrant_boxes_dir }}
+    chown -Rf vagrant:vagrant {{ gitlab_runner_runners_vagrant_boxes_dir }}
+    exit 0
   SHELL
-  
+
 {% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
-  config.vm.synced_folder '{{ synced_folder.src }}', '{{ synced_folder.dest }}'
+  config.vm.synced_folder '{{ synced_folder.src }}', '{{ synced_folder.dest }}', type: '{{ synced_folder.type }}'
 {% endfor %}
 end
 EOF
