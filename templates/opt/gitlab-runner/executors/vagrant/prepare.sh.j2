@@ -19,7 +19,7 @@
 set -ex
 
 exec 9>/var/run/vagrant.pid
-flock -n 9
+flock -x 9
 echo $$ 1>&9
 
 vagrant up --provider libvirt
