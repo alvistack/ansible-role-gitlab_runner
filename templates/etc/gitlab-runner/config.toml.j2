@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+
+concurrent = {{ gitlab_runner_concurrent }}
+check_interval = {{ gitlab_runner_check_interval }}
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  builds_dir = "{{ gitlab_runner_runners_builds_dir }}"
+  cache_dir = "{{ gitlab_runner_runners_cache_dir }}"
+  executor = "custom"
+  name = "{{ gitlab_runner_runners_name }}"
+  token = "{{ gitlab_runner_runners_token }}"
+  url = "{{ gitlab_runner_runners_url }}"
+  [runners.custom]
+    config_exec = "/opt/gitlab-runner/executors/vagrant/config.sh"
+    prepare_exec = "/opt/gitlab-runner/executors/vagrant/prepare.sh"
+    run_exec = "/opt/gitlab-runner/executors/vagrant/run.sh"
+    cleanup_exec = "/opt/gitlab-runner/executors/vagrant/cleanup.sh"

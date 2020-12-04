@@ -27,5 +27,13 @@
       tags: git
 
     - include_role:
+        name: vagrant
+      tags: vagrant
+
+    - include_role:
+        name: libvirt
+      tags: libvirt
+
+    - include_role:
         name: gitlab_runner
       tags: gitlab_runner

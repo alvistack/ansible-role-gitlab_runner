@@ -13,3 +13,57 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# Limits how many jobs globally can be run concurrently. The most upper limit
+# of jobs using all defined runners. 0 does not mean unlimited.
+gitlab_runner_concurrent: "1"
+
+# Defines the interval length, in seconds, between new jobs check. The
+# default value is 3; if set to 0 or lower, the default value will be used.
+gitlab_runner_check_interval: "0"
+
+# The Runner’s description, just informatory.
+gitlab_runner_runners_name: "alvistack/gitlab-runner"
+
+# GitLab URL.
+gitlab_runner_runners_url: ~
+
+# The Runner’s special token (not to be confused with the registration token).
+gitlab_runner_runners_token: ~
+
+# Absolute path to a directory where builds will be stored in context of
+# selected executor (Locally, Docker, SSH).
+gitlab_runner_runners_builds_dir: "/home/vagrant"
+
+# Absolute path to a directory where build caches will be stored in context
+# of selected executor (locally, Docker, SSH). If the docker executor is used,
+# this directory needs to be included in its volumes parameter.
+gitlab_runner_runners_cache_dir: "/var/cache/gitlab-runner"
+
+# Use this image to run builds.
+gitlab_runner_runners_vagrant_image: "alvistack/gitlab-runner"
+
+# String value of number of CPUs.
+gitlab_runner_runners_vagrant_cpus: "4"
+
+# String value containing the memory limit.
+gitlab_runner_runners_vagrant_memory: "16384"
+
+# Make container run in Nested mode.
+gitlab_runner_runners_vagrant_nested: true
+
+# Name of Libvirt network to which all VMs will be connected.
+gitlab_runner_runners_vagrant_management_network_name: "gitlab-runner"
+
+# Address of network to which all VMs will be connected. Must include
+# the address and subnet mask.
+gitlab_runner_runners_vagrant_management_network_address: "172.16.121.0/24"
+
+# Absolute path to a directory where Vagrant box caches will be stored.
+gitlab_runner_runners_vagrant_boxes_dir: "/home/vagrant/.vagrant.d/boxes"
+
+# Specify additional volumes that should be mounted.
+gitlab_runner_runners_vagrant_synced_folders:
+  - { src: ".", dest: "/vagrant", disabled: true }
+  - { src: "{{ gitlab_runner_runners_cache_dir }}", dest: "{{ gitlab_runner_runners_cache_dir }}" }
+  - { src: "{{ gitlab_runner_runners_vagrant_boxes_dir }}", dest: "{{ gitlab_runner_runners_vagrant_boxes_dir }}" }
