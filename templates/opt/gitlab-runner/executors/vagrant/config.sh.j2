@@ -31,7 +31,7 @@ cat > Vagrantfile <<EOF
 Vagrant.configure("2") do |config|
   config.vm.hostname = '${VM_HOSTNAME}'
   config.vm.box = '{{ gitlab_runner_runners_vagrant_image }}'
-  
+
   config.vm.provider :libvirt do |libvirt|
     libvirt.cpu_mode = 'host-model'
     libvirt.cpus = {{ gitlab_runner_runners_vagrant_cpus }}
@@ -48,16 +48,15 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision 'shell', inline: <<-SHELL
-    set -ex
     apt-get update
     apt-get dist-upgrade -y
     apt-get install -y git git-lfs
     mkdir -p {{ gitlab_runner_runners_builds_dir }}
-    chown vagrant:vagrant {{ gitlab_runner_runners_builds_dir }} >/dev/null 2>&1
+    chown vagrant:vagrant {{ gitlab_runner_runners_builds_dir }}
     mkdir -p {{ gitlab_runner_runners_cache_dir }}
-    chown vagrant:vagrant {{ gitlab_runner_runners_cache_dir }} >/dev/null 2>&1
+    chown vagrant:vagrant {{ gitlab_runner_runners_cache_dir }}
     mkdir -p {{ gitlab_runner_runners_vagrant_boxes_dir }}
-    chown vagrant:vagrant {{ gitlab_runner_runners_vagrant_boxes_dir }} >/dev/null 2>&1
+    chown vagrant:vagrant {{ gitlab_runner_runners_vagrant_boxes_dir }}
     exit 0
   SHELL
 
