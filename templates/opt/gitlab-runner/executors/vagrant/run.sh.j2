@@ -16,10 +16,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -ex
+set -eo pipefail
 
-vagrant ssh -- /bin/bash < "${1}"
+vagrant ssh -- -tt /bin/bash < "${1}"
 
 if [ $? -ne 0 ]; then
     exit $BUILD_FAILURE_EXIT_CODE
 fi
+
+exit 0
