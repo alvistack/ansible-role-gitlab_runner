@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# GitLab Runner version.
+gitlab_runner_version: "13.6.0"
+
 # Limits how many jobs globally can be run concurrently. The most upper limit
 # of jobs using all defined runners. 0 does not mean unlimited.
 gitlab_runner_concurrent: "1"

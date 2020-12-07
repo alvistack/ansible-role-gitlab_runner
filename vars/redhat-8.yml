@@ -37,5 +37,5 @@ _yum_repository:
 
 _yum:
   - { state: "latest", name: "ca-certificates" }
-  - { state: "latest", name: "gitlab-runner" }
   - { state: "latest", name: "openssh-clients" }
+  - { state: "present", name: "gitlab-runner={{ gitlab_runner_version }}-1" }
