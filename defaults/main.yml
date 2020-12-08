@@ -34,10 +34,6 @@ gitlab_runner_runners_url: ~
 # The Runner’s special token (not to be confused with the registration token).
 gitlab_runner_runners_token: ~
 
-# Absolute path to a directory where builds will be stored in context of
-# selected executor (Locally, Docker, SSH).
-gitlab_runner_runners_builds_dir: "/home/vagrant"
-
 # Absolute path to a directory where build caches will be stored in context
 # of selected executor (locally, Docker, SSH). If the docker executor is used,
 # this directory needs to be included in its volumes parameter.
@@ -68,5 +64,5 @@ gitlab_runner_runners_vagrant_boxes_dir: "/home/vagrant/.vagrant.d/boxes"
 # Specify additional volumes that should be mounted.
 gitlab_runner_runners_vagrant_synced_folders:
   - { src: ".", dest: "/vagrant", disabled: true }
-  - { src: "{{ gitlab_runner_runners_cache_dir }}", dest: "{{ gitlab_runner_runners_cache_dir }}" }
-  - { src: "{{ gitlab_runner_runners_vagrant_boxes_dir }}", dest: "{{ gitlab_runner_runners_vagrant_boxes_dir }}" }
+  - { src: "{{ gitlab_runner_runners_cache_dir }}", dest: "/var/cache/gitlab-runner" }
+  - { src: "{{ gitlab_runner_runners_vagrant_boxes_dir }}", dest: "/home/vagrant/.vagrant.d/boxes" }
