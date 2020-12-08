@@ -45,6 +45,24 @@ Vagrant.configure("2") do |config|
     libvirt.storage :file, bus: 'virtio', cache: 'writeback'
     libvirt.video_type = 'virtio'
     libvirt.volume_cache = 'writeback'
+
+{% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
+    libvirt.synced_folder '{{ synced_folder.src }}', '{{ synced_folder.dest }}',
+      disabled: {{ synced_folder.disabled | default(false) | bool | lower }},
+      type: '{{ synced_folder.type | default('9p') }}'
+{% endfor %}
+  end
+
+  config.vm.provider :virtualbox do |virtualbox|
+    virtualbox.cpus: {{ gitlab_runner_runners_vagrant_cpus }}
+    virtualbox.memory = {{ gitlab_runner_runners_vagrant_memory }}
+    virtualbox.customize ['modifyvm', :id, '--nested-hw-virt', '{{ gitlab_runner_runners_vagrant_nested | bool | ternary('on', 'off') }}']
+
+{% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
+    virtualbox.synced_folder '{{ synced_folder.src }}', '{{ synced_folder.dest }}',
+      disabled: {{ synced_folder.disabled | default(false) | bool | lower }},
+      type: '{{ synced_folder.type | default('virtualbox') }}'
+{% endfor %}
   end
 
   config.vm.provision 'shell', inline: <<-SHELL
@@ -60,12 +78,6 @@ Vagrant.configure("2") do |config|
     chown vagrant:vagrant {{ gitlab_runner_runners_vagrant_boxes_dir }} || echo \${?}
     exit 0
   SHELL
-
-{% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
-  config.vm.synced_folder '{{ synced_folder.src }}', '{{ synced_folder.dest }}',
-    disabled: {{ synced_folder.disabled | default(false) | bool | lower }},
-    type: '{{ synced_folder.type | default('9p') }}'
-{% endfor %}
 end
 EOF
 
