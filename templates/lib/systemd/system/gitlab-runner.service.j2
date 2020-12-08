@@ -2,8 +2,8 @@
 
 [Unit]
 Description=GitLab Runner
-After=network-online.target local-fs.target remote-fs.target time-sync.target docker.service libvirt-guests.service
-Wants=network-online.target local-fs.target remote-fs.target time-sync.target docker.service libvirt-guests.service
+After=multi-user.target
+Wants=multi-user.target
 
 [Service]
 StartLimitInterval=5
