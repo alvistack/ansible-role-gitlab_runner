@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provider :virtualbox do |virtualbox|
-    virtualbox.cpus: {{ gitlab_runner_runners_vagrant_cpus }}
+    virtualbox.cpus = {{ gitlab_runner_runners_vagrant_cpus }}
     virtualbox.memory = {{ gitlab_runner_runners_vagrant_memory }}
     virtualbox.customize ['modifyvm', :id, '--nested-hw-virt', '{{ gitlab_runner_runners_vagrant_nested | bool | ternary('on', 'off') }}']
 
