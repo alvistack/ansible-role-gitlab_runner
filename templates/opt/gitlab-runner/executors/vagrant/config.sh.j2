@@ -68,9 +68,7 @@ Vagrant.configure("2") do |config|
   SHELL
 
 {% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
-  config.vm.synced_folder '{{ synced_folder.src }}', '{{ synced_folder.dest }}',
-    disabled: {{ synced_folder.disabled | default(false) | bool | lower }},
-    type: '{{ synced_folder.type | default('9p') }}'
+  config.vm.synced_folder '{{ synced_folder.src }}', '{{ synced_folder.dest }}', type: '{{ synced_folder.type }}'
 {% endfor %}
 end
 EOF
