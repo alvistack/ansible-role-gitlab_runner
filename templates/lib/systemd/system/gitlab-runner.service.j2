@@ -3,7 +3,8 @@
 [Unit]
 Description=GitLab Runner
 After=multi-user.target
-Wants=multi-user.target
+Before=shutdown.target
+Wants=multi-user.target shutdown.target
 
 [Service]
 StartLimitInterval=5
