@@ -63,5 +63,5 @@ gitlab_runner_runners_vagrant_boxes_dir: "/home/vagrant/.vagrant.d/boxes"
 
 # Specify additional volumes that should be mounted.
 gitlab_runner_runners_vagrant_synced_folders:
-  - { src: "{{ gitlab_runner_runners_cache_dir }}", dest: "/var/cache/gitlab-runner", type: "9p" }
-  - { src: "{{ gitlab_runner_runners_vagrant_boxes_dir }}", dest: "/home/vagrant/.vagrant.d/boxes", type: "9p" }
+  - { src: "{{ gitlab_runner_runners_cache_dir }}", dest: "/var/cache/gitlab-runner" }
+  - { src: "{{ gitlab_runner_runners_vagrant_boxes_dir }}", dest: "/home/vagrant/.vagrant.d/boxes" }
