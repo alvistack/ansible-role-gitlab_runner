@@ -26,7 +26,7 @@ gitlab_runner_concurrent: "1"
 gitlab_runner_check_interval: "0"
 
 # The Runner's description, just informatory.
-gitlab_runner_runners_name: "alvistack/gitlab-runner-{{ gitlab_runner_version }}"
+gitlab_runner_runners_name: "alvistack/gitlab-runner"
 
 # GitLab URL.
 gitlab_runner_runners_url: ~
@@ -40,7 +40,7 @@ gitlab_runner_runners_token: ~
 gitlab_runner_runners_cache_dir: "/var/cache/gitlab-runner"
 
 # Use this image to run builds.
-gitlab_runner_runners_vagrant_image: "alvistack/gitlab-runner-{{ gitlab_runner_version }}"
+gitlab_runner_runners_vagrant_image: "alvistack/gitlab-runner-13.6"
 
 # String value of number of CPUs.
 gitlab_runner_runners_vagrant_cpus: "4"
