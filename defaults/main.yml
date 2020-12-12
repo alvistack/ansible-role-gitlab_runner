@@ -25,13 +25,13 @@ gitlab_runner_concurrent: "1"
 # default value is 3; if set to 0 or lower, the default value will be used.
 gitlab_runner_check_interval: "0"
 
-# The Runner’s description, just informatory.
-gitlab_runner_runners_name: "alvistack/gitlab-runner"
+# The Runner's description, just informatory.
+gitlab_runner_runners_name: "alvistack/gitlab-runner-{{ gitlab_runner_version }}"
 
 # GitLab URL.
 gitlab_runner_runners_url: ~
 
-# The Runner’s special token (not to be confused with the registration token).
+# The Runner's special token (not to be confused with the registration token).
 gitlab_runner_runners_token: ~
 
 # Absolute path to a directory where build caches will be stored in context
@@ -40,7 +40,7 @@ gitlab_runner_runners_token: ~
 gitlab_runner_runners_cache_dir: "/var/cache/gitlab-runner"
 
 # Use this image to run builds.
-gitlab_runner_runners_vagrant_image: "alvistack/gitlab-runner"
+gitlab_runner_runners_vagrant_image: "alvistack/gitlab-runner-{{ gitlab_runner_version }}"
 
 # String value of number of CPUs.
 gitlab_runner_runners_vagrant_cpus: "4"
