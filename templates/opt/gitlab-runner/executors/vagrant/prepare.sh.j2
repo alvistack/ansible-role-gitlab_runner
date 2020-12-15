@@ -22,6 +22,8 @@ exec 9>/var/run/vagrant.pid
 flock -x 9
 echo $$ 1>&9
 
+vagrant box add --clean {{ gitlab_runner_runners_vagrant_image }} || echo $?
+
 vagrant up
 
 exit 0

@@ -80,10 +80,4 @@ Vagrant.configure("2") do |config|
 end
 EOF
 
-exec 9>{{ gitlab_runner_runners_vagrant_boxes_dir }}/vagrant.pid
-flock -x 9
-echo $$ 1>&9
-
-vagrant box add --clean {{ gitlab_runner_runners_vagrant_image }} || echo $?
-
 exit 0
