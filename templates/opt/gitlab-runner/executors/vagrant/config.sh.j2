@@ -72,8 +72,6 @@ Vagrant.configure("2") do |config|
     chown vagrant:vagrant /var/cache/gitlab-runner || echo \${?}
     mkdir -p /home/vagrant/.vagrant.d/boxes
     chown vagrant:vagrant /home/vagrant/.vagrant.d/boxes || echo \${?}
-    mkdir -p /root/.vagrant.d/boxes
-    mount --bind /home/vagrant/.vagrant.d/boxes /root/.vagrant.d/boxes
     exit 0
   SHELL
 
