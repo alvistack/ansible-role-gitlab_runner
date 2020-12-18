@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# {{ ansible_managed }}
+
+set -euo pipefail
+
+find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type f -mmin +60 -exec rm -f -- '{}' \;
+find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type d -mmin +60 -exec rm -rf -- '{}' \;
