@@ -63,9 +63,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision 'shell', inline: <<-SHELL
     set -euo pipefail
-    apt-get update
-    apt-get dist-upgrade -y
-    apt-get install -y git git-lfs
     mkdir -p /home/vagrant
     chown vagrant:vagrant /home/vagrant || echo \${?}
     mkdir -p /var/cache/gitlab-runner
