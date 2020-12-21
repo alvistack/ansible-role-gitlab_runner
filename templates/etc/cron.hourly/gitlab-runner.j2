@@ -7,6 +7,6 @@ set -euo pipefail
 # Prune Vagrant invalid entries.
 vagrant global-status --prune || echo $?
 
-# Prune GitLab Runner cache older than 2 hours.
-find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type f -mmin +120 -exec rm -f -- '{}' \; || echo $?
-find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type d -mmin +120 -exec rm -rf -- '{}' \; || echo $?
+# Prune GitLab Runner cache older than 1 day.
+find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type f -mtime +1 -exec rm -f -- '{}' \; || echo $?
+find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type d -mtime +1 -exec rm -rf -- '{}' \; || echo $?
