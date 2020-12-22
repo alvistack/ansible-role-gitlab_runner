@@ -18,15 +18,19 @@
 
 set -euo pipefail
 
+# Generate a unique machine hostname per job.
 VM_HOSTNAME="${VM_HOSTNAME:-"runner-${CUSTOM_ENV_CI_RUNNER_ID}-project-${CUSTOM_ENV_CI_PROJECT_ID}-concurrent-${CUSTOM_ENV_CI_CONCURRENT_PROJECT_ID}"}"
 echo ${VM_HOSTNAME} > VM_HOSTNAME
 
+# Export $CI_PIPELINE_URL for debug.
 CI_PIPELINE_URL="${CI_PIPELINE_URL:-"${CUSTOM_ENV_CI_PIPELINE_URL}"}"
 echo ${CI_PIPELINE_URL} > CI_PIPELINE_URL
 
+# Export $CI_JOB_URL for debug.
 CI_JOB_URL="${CI_JOB_URL:-"${CUSTOM_ENV_CI_JOB_URL}"}"
 echo ${CI_JOB_URL} > CI_JOB_URL
 
+# Generate Vagrantfile for provision machine per job.
 cat > Vagrantfile <<EOF
 Vagrant.configure("2") do |config|
   config.vm.hostname = '${VM_HOSTNAME}'
@@ -60,19 +64,11 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder '{{ synced_folder.src }}', '{{ synced_folder.dest }}'
 {% endfor %}
   end
-
-  config.vm.provision 'shell', inline: <<-SHELL
-    set -euo pipefail
-    mkdir -p /home/vagrant
-    chown -Rf vagrant:vagrant /home/vagrant || echo \${?}
-    mkdir -p /var/cache/gitlab-runner
-    chown -Rf vagrant:vagrant /var/cache/gitlab-runner || echo \${?}
-    mkdir -p /home/vagrant/.vagrant.d/boxes
-    chown -Rf vagrant:vagrant /home/vagrant/.vagrant.d/boxes || echo \${?}
-    exit 0
-  SHELL
-
 end
 EOF
+
+# Ensure ownership from host before 9p mount.
+chown -Rf 1000:1000 {{ gitlab_runner_runners_cache_dir }} || echo $?
+chown -Rf 1000:1000 {{ gitlab_runner_runners_vagrant_boxes_dir }} || echo $?
 
 exit 0
