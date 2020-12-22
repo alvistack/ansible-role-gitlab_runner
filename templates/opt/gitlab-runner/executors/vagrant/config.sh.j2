@@ -64,11 +64,11 @@ Vagrant.configure("2") do |config|
   config.vm.provision 'shell', inline: <<-SHELL
     set -euo pipefail
     mkdir -p /home/vagrant
-    chown vagrant:vagrant /home/vagrant || echo \${?}
+    chown -Rf vagrant:vagrant /home/vagrant || echo \${?}
     mkdir -p /var/cache/gitlab-runner
-    chown vagrant:vagrant /var/cache/gitlab-runner || echo \${?}
+    chown -Rf vagrant:vagrant /var/cache/gitlab-runner || echo \${?}
     mkdir -p /home/vagrant/.vagrant.d/boxes
-    chown vagrant:vagrant /home/vagrant/.vagrant.d/boxes || echo \${?}
+    chown -Rf vagrant:vagrant /home/vagrant/.vagrant.d/boxes || echo \${?}
     exit 0
   SHELL
 
