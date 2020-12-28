@@ -18,10 +18,12 @@
 
 set -euo pipefail
 
+# Non-parallel `vagrant up` per machine.
 exec 9>/var/run/vagrant.pid
 flock -x 9
 echo $$ 1>&9
 
+# Create guest machine per job.
 vagrant up
 
 exit 0
