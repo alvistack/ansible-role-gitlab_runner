@@ -1,9 +1,15 @@
 # Ansible Role for GitLab Runner
 
-## 4.6.0 - TBC
+## 4.7.0 - TBC
 
 ### Major Changes
 
+## 4.6.0 - 2020-12-28
+
+### Major Changes
+
+  - Simplify Molecule scenario for vagrant-libvirt
+  - Prune GitLab Runner cache older than 1 day
   - Default with custom Vagrant executor
   - Migrate from Travis CI to GitLab CI
 
