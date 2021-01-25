@@ -68,7 +68,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/cron.hourly/gitlab-runner" }
+    - { dest: "/etc/cron.hourly/gitlab-runner", mode: "0755" }
     - { dest: "/etc/gitlab-runner/config.toml" }
     - { dest: "/lib/systemd/system/gitlab-runner.service" }
     - { dest: "/opt/gitlab-runner/executors/vagrant/cleanup.sh", mode: "0755" }
@@ -87,7 +87,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/etc/cron.hourly/gitlab-runner" }
+    - { dest: "/etc/cron.hourly/gitlab-runner", mode: "0755" }
     - { dest: "/etc/gitlab-runner/config.toml" }
     - { dest: "/etc/systemd/system/gitlab-runner.service", state: "absent" }
     - { dest: "/lib/systemd/system/gitlab-runner.service" }
