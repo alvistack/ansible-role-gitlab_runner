@@ -15,10 +15,10 @@
 # limitations under the License.
 
 _rpm_key:
-  - key: "https://packages.gitlab.com/runner/gitlab-runner/gpgkey"
+  - key: "http://packages.gitlab.com/runner/gitlab-runner/gpgkey"
     fingerprint: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
     state: "present"
-  - key: "https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-366915F31B487241.pub.gpg"
+  - key: "http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-366915F31B487241.pub.gpg"
     fingerprint: "30183AC2C4E23A409EFBE7059CE45ABC880721D4"
     state: "present"
 
@@ -26,13 +26,13 @@ _yum_repository:
   - file: "gitlab-runner"
     name: "gitlab-runner"
     description: "GitLab Runner"
-    baseurl: "https://packages.gitlab.com/runner/gitlab-runner/el/8/x86_64"
+    baseurl: "http://packages.gitlab.com/runner/gitlab-runner/el/8/x86_64"
     enabled: true
     priority: "2"
     gpgcheck: true
     gpgkey:
-      - "https://packages.gitlab.com/runner/gitlab-runner/gpgkey"
-      - "https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-366915F31B487241.pub.gpg"
+      - "http://packages.gitlab.com/runner/gitlab-runner/gpgkey"
+      - "http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-366915F31B487241.pub.gpg"
     state: "present"
 
 _yum:
