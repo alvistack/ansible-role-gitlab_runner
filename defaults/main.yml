@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# This configures the default provider Vagrant will use.
+vagrant_default_provider: "libvirt"
+
 # GitLab Runner version.
 gitlab_runner_version: "13.10.0"
 
