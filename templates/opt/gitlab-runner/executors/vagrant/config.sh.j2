@@ -72,7 +72,7 @@ EOF
 
 # Ensure ownership for synced folder.
 {% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
-chown -Rf 1000:1000 {{ synced_folder }} || echo $?
+chown -Rf 1000:1000 {{ synced_folder.src }} || echo $?
 {% endfor %}
 
 exit 0
