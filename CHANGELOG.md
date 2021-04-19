@@ -4,6 +4,11 @@
 
 ### Major Changes
 
+  - Define `vagrant_default_provider: "libvirt"`
+  - Switch Vagrant Synced Folder for Libvirt from 9p to virtio-fs
+  - Support Fedora 34
+  - Support Ubuntu 21.04
+
 ## 4.7.0 - 2021-03-13
 
 ### Major Changes
