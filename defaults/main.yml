@@ -17,8 +17,11 @@
 # This configures the default provider Vagrant will use.
 vagrant_default_provider: "libvirt"
 
+# GitLab release.
+gitlab_release: "13.11"
+
 # GitLab Runner version.
-gitlab_runner_version: "13.11.0"
+gitlab_runner_version: "{{ _gitlab_runner_version[gitlab_release] }}"
 
 # Limits how many jobs globally can be run concurrently. The most upper limit
 # of jobs using all defined runners. 0 does not mean unlimited.
@@ -43,7 +46,7 @@ gitlab_runner_runners_token: ~
 gitlab_runner_runners_cache_dir: "/var/cache/gitlab-runner"
 
 # Use this image to run builds.
-gitlab_runner_runners_vagrant_image: "alvistack/gitlab-runner-13.11"
+gitlab_runner_runners_vagrant_image: "alvistack/gitlab-runner-{{ gitlab_release }}"
 
 # String value of number of CPUs.
 gitlab_runner_runners_vagrant_cpus: "4"
