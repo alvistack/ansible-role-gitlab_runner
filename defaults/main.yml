@@ -31,14 +31,9 @@ gitlab_runner_concurrent: "1"
 # default value is 3; if set to 0 or lower, the default value will be used.
 gitlab_runner_check_interval: "0"
 
-# The Runner's description, just informatory.
-gitlab_runner_runners_name: "alvistack/gitlab-runner"
-
-# GitLab URL.
-gitlab_runner_runners_url: ~
-
-# The Runner's special token (not to be confused with the registration token).
-gitlab_runner_runners_token: ~
+# Each [[runners]] section defines one runner.
+gitlab_runner_runners:
+  - { name: "alvistack/gitlab-runner", url: ~, token: ~ }
 
 # Absolute path to a directory where build caches will be stored in context
 # of selected executor (locally, Docker, SSH). If the docker executor is used,

@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Support multiple runners
   - Support Docker Vagrant Provider
   - Define `vagrant_default_provider: "libvirt"`
   - Switch Vagrant Synced Folder for Libvirt from 9p to virtio-fs
