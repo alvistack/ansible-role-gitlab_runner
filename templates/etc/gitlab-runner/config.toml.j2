@@ -6,15 +6,18 @@ check_interval = {{ gitlab_runner_check_interval }}
 [session_server]
   session_timeout = 1800
 
+{% for runner in gitlab_runner_runners %}
 [[runners]]
   builds_dir = "/home/vagrant"
   cache_dir = "/var/cache/gitlab-runner"
   executor = "custom"
-  name = "{{ gitlab_runner_runners_name }}"
-  token = "{{ gitlab_runner_runners_token }}"
-  url = "{{ gitlab_runner_runners_url }}"
+  name = "{{ runner.name }}"
+  token = "{{ runner.token }}"
+  url = "{{ runner.url }}"
   [runners.custom]
     config_exec = "/opt/gitlab-runner/executors/vagrant/config.sh"
     prepare_exec = "/opt/gitlab-runner/executors/vagrant/prepare.sh"
     run_exec = "/opt/gitlab-runner/executors/vagrant/run.sh"
     cleanup_exec = "/opt/gitlab-runner/executors/vagrant/cleanup.sh"
+
+{% endfor %}

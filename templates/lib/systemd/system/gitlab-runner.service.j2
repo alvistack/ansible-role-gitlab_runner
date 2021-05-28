@@ -9,10 +9,9 @@ Wants=multi-user.target shutdown.target
 [Service]
 StartLimitInterval=5
 StartLimitBurst=10
-Restart=on-failure
+Restart=always
 RestartSec=120
-ExecStart=/usr/bin/gitlab-runner run \
-    --config /etc/gitlab-runner/config.toml
+ExecStart=/usr/bin/gitlab-runner run --config /etc/gitlab-runner/config.toml
 
 [Install]
 WantedBy=multi-user.target
