@@ -2,7 +2,7 @@
 
 # {{ ansible_managed }}
 
-set -euo pipefail
+set -euxo pipefail
 
 # Prune Vagrant invalid entries.
 vagrant global-status --prune || echo $?

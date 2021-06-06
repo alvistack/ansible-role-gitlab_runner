@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -euo pipefail
+set -euxo pipefail
 
 # Non-parallel `vagrant up` per machine.
 exec 9>/var/run/vagrant.pid
