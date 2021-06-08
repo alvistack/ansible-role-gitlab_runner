@@ -1,6 +1,4 @@
-#!/bin/bash
-
-# {{ ansible_managed }}
+---
 
 # (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
@@ -16,14 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -euxo pipefail
+_apt_key:
+  - url: "http://packages.gitlab.com/runner/gitlab-runner/gpgkey"
+    id: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
+    state: "present"
 
-# Non-parallel `vagrant up` per machine.
-exec 9>/var/run/vagrant.pid
-flock -x 9
-echo $$ 1>&9
+_apt_repository:
+  - repo: "deb http://packages.gitlab.com/runner/gitlab-runner/debian bullseye main"
+    state: "present"
 
-# Create guest machine per job.
-vagrant up
-
-exit 0
+_apt:
+  - { state: "latest", name: "ca-certificates" }
+  - { state: "latest", name: "openssh-client" }
+  - { state: "present", name: "gitlab-runner={{ gitlab_runner_version }}" }
