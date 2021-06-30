@@ -18,8 +18,8 @@ _rpm_key:
   - key: "http://packages.gitlab.com/runner/gitlab-runner/gpgkey"
     fingerprint: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
     state: "present"
-  - key: "http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-366915F31B487241.pub.gpg"
-    fingerprint: "30183AC2C4E23A409EFBE7059CE45ABC880721D4"
+  - key: "http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg"
+    fingerprint: "09E57083F34CCA94D541BC58A674BF8135DFA027"
     state: "present"
 
 _yum_repository:
@@ -32,7 +32,7 @@ _yum_repository:
     gpgcheck: true
     gpgkey:
       - "http://packages.gitlab.com/runner/gitlab-runner/gpgkey"
-      - "http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-366915F31B487241.pub.gpg"
+      - "http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg"
     state: "present"
 
 _yum:
