@@ -36,6 +36,15 @@
     state: "{{ item.state }}"
   loop: "{{ _yum_repository }}"
 
+- name: yum versionlock delete
+  community.general.yum_versionlock:
+    name: "{{ item.name | regex_replace('.' + gitlab_runner_version + '.*', '') }}"
+    state: "absent"
+  loop: "{{ _yum }}"
+  when: gitlab_runner_version in item.name
+  changed_when: false
+  failed_when: false
+
 - name: yum install
   yum:
     name: "{{ item.name }}"
@@ -45,3 +54,12 @@
   until: result is succeeded
   notify:
     - gitlab_runner | systemctl restart gitlab-runner.service
+
+- name: yum versionlock add
+  community.general.yum_versionlock:
+    name: "{{ item.name | regex_replace('.' + gitlab_runner_version + '.*', '') }}"
+    state: "present"
+  loop: "{{ _yum }}"
+  when: gitlab_runner_version in item.name
+  changed_when: false
+  failed_when: false

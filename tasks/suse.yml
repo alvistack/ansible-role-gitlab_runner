@@ -39,6 +39,13 @@
     reposdir: "{{ item.reposdir | default('/etc/zypp/repos.d') }}"
   loop: "{{ _yum_repository }}"
 
+- name: zypper removelock
+  command: zypper removelock {{ item.name | regex_replace('.' + gitlab_runner_version + '.*', '') }}
+  loop: "{{ _zypper }}"
+  when: gitlab_runner_version in item.name
+  changed_when: false
+  failed_when: false
+
 - name: zypper install
   vars:
     ansible_python_interpreter: "python3"
@@ -50,3 +57,10 @@
   until: result is succeeded
   notify:
     - gitlab_runner | systemctl restart gitlab-runner.service
+
+- name: zypper addlock
+  command: zypper addlock {{ item.name | regex_replace('.' + gitlab_runner_version + '.*', '') }}
+  loop: "{{ _zypper }}"
+  when: gitlab_runner_version in item.name
+  changed_when: false
+  failed_when: false
