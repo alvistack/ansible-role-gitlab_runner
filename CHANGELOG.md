@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Move systemd service to `/etc/systemd` which generally available
   - Restrict package to a fixed version
   - Upgrade minimal Ansible community package support to 4.1.0
   - Support Debian 11
