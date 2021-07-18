@@ -32,6 +32,15 @@
   register: result
   until: result is succeeded
 
+- name: apt-mark unhold
+  dpkg_selections:
+    name: "{{ item.name | regex_replace('.' + gitlab_runner_version + '.*', '') }}"
+    selection: "install"
+  loop: "{{ _apt }}"
+  when: gitlab_runner_version in item.name
+  changed_when: false
+  failed_when: false
+
 - name: apt-get install
   apt:
     name: "{{ item.name }}"
@@ -41,3 +50,12 @@
   until: result is succeeded
   notify:
     - gitlab_runner | systemctl restart gitlab-runner.service
+
+- name: apt-mark hold
+  dpkg_selections:
+    name: "{{ item.name | regex_replace('.' + gitlab_runner_version + '.*', '') }}"
+    selection: "hold"
+  loop: "{{ _apt }}"
+  when: gitlab_runner_version in item.name
+  changed_when: false
+  failed_when: false
