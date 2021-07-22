@@ -15,5 +15,5 @@
 # limitations under the License.
 
 _gitlab_runner_version:
+  "14.1": "14.1.0"
   "14.0": "14.0.1"
-  "13.12": "13.12.0"
