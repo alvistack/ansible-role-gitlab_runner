@@ -1,13 +1,9 @@
 # Ansible Role for GitLab Runner
 
-[![Gitlab pipeline
-status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-gitlab_runner/master)](https://gitlab.com/alvistack/ansible-role-gitlab_runner/-/pipelines)
-[![GitHub
-release](https://img.shields.io/github/release/alvistack/ansible-role-gitlab_runner.svg)](https://github.com/alvistack/ansible-role-gitlab_runner/releases)
-[![GitHub
-license](https://img.shields.io/github/license/alvistack/ansible-role-gitlab_runner.svg)](https://github.com/alvistack/ansible-role-gitlab_runner/blob/master/LICENSE)
-[![Ansible
-Role](https://img.shields.io/badge/galaxy-alvistack.gitlab_runner-blue.svg)](https://galaxy.ansible.com/alvistack/gitlab_runner)
+[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-gitlab_runner/master)](https://gitlab.com/alvistack/ansible-role-gitlab_runner/-/pipelines)
+[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-gitlab_runner.svg)](https://github.com/alvistack/ansible-role-gitlab_runner/releases)
+[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-gitlab_runner.svg)](https://github.com/alvistack/ansible-role-gitlab_runner/blob/master/LICENSE)
+[![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.gitlab_runner-blue.svg)](https://galaxy.ansible.com/alvistack/gitlab_runner)
 
 Ansible Role for GitLab Runner Installation.
 
@@ -43,8 +39,7 @@ This role could simply deploy to `localhost` as below:
 ## License
 
   - Code released under [Apache License 2.0](LICENSE)
-  - Docs released under [CC BY
-    4.0](http://creativecommons.org/licenses/by/4.0/)
+  - Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
 
 ## Author Information
 
