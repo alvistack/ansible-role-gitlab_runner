@@ -26,4 +26,4 @@ _apt_repository:
 _apt:
   - { state: "latest", name: "ca-certificates" }
   - { state: "latest", name: "openssh-client" }
-  - { state: "present", name: "gitlab-runner={{ gitlab_runner_version }}" }
+  - { state: "present", name: "gitlab-runner={{ gitlab_runner_version }}*" }
