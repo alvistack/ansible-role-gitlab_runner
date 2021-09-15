@@ -29,6 +29,7 @@ _yum_repository:
     baseurl: "http://packages.gitlab.com/runner/gitlab-runner/el/8/x86_64"
     enabled: true
     priority: "2"
+    module_hotfixes: true
     gpgcheck: true
     gpgkey:
       - "http://packages.gitlab.com/runner/gitlab-runner/gpgkey"
