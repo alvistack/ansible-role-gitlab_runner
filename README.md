@@ -1,5 +1,7 @@
 # Ansible Role for GitLab Runner
 
+<img src="/alvistack.svg" width="75" alt="AlviStack">
+
 [![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-gitlab_runner/master)](https://gitlab.com/alvistack/ansible-role-gitlab_runner/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-gitlab_runner.svg)](https://github.com/alvistack/ansible-role-gitlab_runner/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-gitlab_runner.svg)](https://github.com/alvistack/ansible-role-gitlab_runner/blob/master/LICENSE)
