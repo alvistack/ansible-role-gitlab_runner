@@ -15,13 +15,13 @@
 # limitations under the License.
 
 - name: gitlab_runner | systemctl daemon-reload
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
   changed_when: false
   failed_when: false
 
 - name: gitlab_runner | systemctl restart gitlab-runner.service
-  service:
+  ansible.builtin.service:
     name: "gitlab-runner.service"
     state: "restarted"
     enabled: true

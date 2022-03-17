@@ -19,6 +19,6 @@
   become: true
   tasks:
     - name: gitlab-runner --version
-      command: gitlab-runner --version
+      ansible.builtin.command: gitlab-runner --version
       register: result
       changed_when: result is not succeeded
