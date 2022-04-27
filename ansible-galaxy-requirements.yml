@@ -20,14 +20,14 @@ collections:
     version: ">=0.0.0,<1.0.0"
 
 roles:
-  - name: git
+  - name: alvistack.git
     src: https://github.com/alvistack/ansible-role-git
     version: develop
 
-  - name: vagrant
+  - name: alvistack.vagrant
     src: https://github.com/alvistack/ansible-role-vagrant
     version: develop
 
-  - name: libvirt
+  - name: alvistack.libvirt
     src: https://github.com/alvistack/ansible-role-libvirt
     version: develop
