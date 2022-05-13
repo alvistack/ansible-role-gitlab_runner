@@ -66,7 +66,6 @@
     - { dest: "/etc/systemd/system" }
     - { dest: "/opt/gitlab-runner/executors/vagrant" }
     - { dest: "{{ gitlab_runner_runners_cache_dir }}", owner: "1000", group: "1000" }
-    - { dest: "{{ gitlab_runner_runners_vagrant_boxes_dir }}", owner: "1000", group: "1000" }
 
 - name: copy templates
   ansible.builtin.template:
