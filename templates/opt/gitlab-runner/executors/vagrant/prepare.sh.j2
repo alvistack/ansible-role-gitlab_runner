@@ -23,6 +23,14 @@ exec 9>/var/run/vagrant.pid
 flock -x 9
 echo $$ 1>&9
 
+# Update Vagrant box image.
+vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_image }} || echo $?
+
+# Purge outdated Vagrant box image.
+vagrant box prune --force --keep-active-boxes
+find $HOME/.vagrant.d/boxes/ -type f -empty -exec rm -rfv {} \;
+find $HOME/.vagrant.d/boxes/ -type d -empty -exec rm -rfv {} \;
+
 # Create guest machine per job.
 vagrant up
 
