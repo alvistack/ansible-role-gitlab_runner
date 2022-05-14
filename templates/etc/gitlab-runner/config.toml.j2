@@ -8,8 +8,8 @@ check_interval = {{ gitlab_runner_check_interval }}
 
 {% for runner in gitlab_runner_runners %}
 [[runners]]
-  builds_dir = "/home/vagrant"
-  cache_dir = "/var/cache/gitlab-runner"
+  builds_dir = "{{ gitlab_runner_runners_builds_dir }}"
+  cache_dir = "{{ gitlab_runner_runners_cache_dir }}"
   executor = "custom"
   name = "{{ runner.name }}"
   token = "{{ runner.token }}"

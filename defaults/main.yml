@@ -35,6 +35,10 @@ gitlab_runner_check_interval: "0"
 gitlab_runner_runners:
   - { name: "alvistack/gitlab-runner", url: ~, token: ~ }
 
+# Absolute path to a directory where builds are stored in the context of
+# the selected executor. For example, locally, Docker, or SSH.
+gitlab_runner_runners_builds_dir: "/home/vagrant"
+
 # Absolute path to a directory where build caches will be stored in context
 # of selected executor (locally, Docker, SSH). If the docker executor is used,
 # this directory needs to be included in its volumes parameter.
