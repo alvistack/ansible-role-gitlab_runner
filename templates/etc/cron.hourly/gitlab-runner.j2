@@ -9,7 +9,11 @@ vagrant global-status --prune || echo $?
 
 # Purge outdated Vagrant box image.
 vagrant box prune --force --keep-active-boxes || echo $?
+VAGRANT_HOME=/home/vagrant/.vagrant.d vagrant box prune --force --keep-active-boxes || echo $?
 
-# Prune GitLab Runner cache older than 1 day.
-find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type f -mtime +1 -delete || echo $?
-find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type d -mtime +1 -delete || echo $?
+# Purge outdated Podman image.
+podman image prune --force || echo $?
+
+# Prune GitLab Runner cache older than 3 days.
+find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type f -mtime +3 -delete || echo $?
+find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type d -mtime +3 -delete || echo $?
