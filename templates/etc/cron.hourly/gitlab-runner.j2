@@ -4,9 +4,25 @@
 
 set -euxo pipefail
 
+unset VAGRANT_FORCE_COLOR
+
 # Prune Vagrant invalid entries.
 vagrant global-status --prune || echo $?
 
-# Prune GitLab Runner cache older than 1 day.
-find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type f -mtime +1 -exec rm -f -- '{}' \; || echo $?
-find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type d -mtime +1 -exec rm -rf -- '{}' \; || echo $?
+# Update Vagrant box image for root.
+vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_image }} || echo $?
+vagrant box prune --force --keep-active-boxes || echo $?
+
+# Update Vagrant box images for /home/vagrant/.vagrant.d.
+export VAGRANT_HOME=/home/vagrant/.vagrant.d
+vagrant box list | while read _LINE; do
+    _BOX="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\1/g')"
+    _PROVIDER="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\2/g')"
+    vagrant box add --provider $_PROVIDER $_BOX || echo $?
+done
+vagrant box prune --force --keep-active-boxes || echo $?
+unset VAGRANT_HOME
+
+# Prune GitLab Runner cache older than 3 days.
+find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type f -mtime +3 -delete || echo $?
+find {{ gitlab_runner_runners_cache_dir }}/. ! -name . -type d -mtime +3 -delete || echo $?
