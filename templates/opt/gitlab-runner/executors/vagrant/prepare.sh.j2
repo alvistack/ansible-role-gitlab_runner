@@ -23,6 +23,9 @@ exec 9>/var/run/vagrant.pid
 flock -x 9
 echo $$ 1>&9
 
+# Lists all the boxes that are installed into Vagrant.
+vagrant box list
+
 # Create guest machine per job.
 vagrant up
 
