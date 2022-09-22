@@ -18,7 +18,7 @@
 vagrant_default_provider: "libvirt"
 
 # GitLab release.
-gitlab_runner_release: "15.3"
+gitlab_runner_release: "15.4"
 
 # GitLab Runner version.
 gitlab_runner_version: "{{ _gitlab_runner_version[gitlab_runner_release] }}"
