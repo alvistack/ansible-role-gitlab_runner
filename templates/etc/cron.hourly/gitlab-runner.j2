@@ -13,8 +13,8 @@ vagrant global-status --prune || echo $?
 export VAGRANT_HOME=/root/.vagrant.d
 vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_image }} || echo $?
 vagrant box prune --force --keep-active-boxes || echo $?
-find $VAGRANT_HOME/boxes -type f -empty -exec rm -rf {} \;
-find $VAGRANT_HOME/boxes -type d -empty -exec rm -rf {} \;
+find $VAGRANT_HOME/boxes -type f -empty -exec rm -rf {} \; || echo $?
+find $VAGRANT_HOME/boxes -type d -empty -exec rm -rf {} \; || echo $?
 unset VAGRANT_HOME
 
 # Update Vagrant box images for /home/vagrant/.vagrant.d.
@@ -25,8 +25,8 @@ vagrant box list | while read _LINE; do
     vagrant box add --provider $_PROVIDER $_BOX || echo $?
 done
 vagrant box prune --force --keep-active-boxes || echo $?
-find $VAGRANT_HOME/boxes -type f -empty -exec rm -rf {} \;
-find $VAGRANT_HOME/boxes -type d -empty -exec rm -rf {} \;
+find $VAGRANT_HOME/boxes -type f -empty -exec rm -rf {} \; || echo $?
+find $VAGRANT_HOME/boxes -type d -empty -exec rm -rf {} \; || echo $?
 unset VAGRANT_HOME
 
 # Prune GitLab Runner cache older than 3 days.
