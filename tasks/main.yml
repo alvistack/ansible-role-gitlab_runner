@@ -133,6 +133,7 @@
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "/etc/cron.daily/gitlab-runner", mode: "0755" }
+    - { dest: "/etc/cron.hourly/gitlab-runner", state: "absent" }
   when: inventory_hostname == ansible_play_hosts[0]
 
 - name: flush handlers
