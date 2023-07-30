@@ -29,7 +29,7 @@ _yum_repository:
   - file: "gitlab-runner"
     name: "gitlab-runner"
     description: "GitLab Runner"
-    baseurl: "http://packages.gitlab.com/runner/gitlab-runner/el/8/x86_64"
+    baseurl: "http://packages.gitlab.com/runner/gitlab-runner/ol/8/x86_64"
     enabled: true
     priority: "2"
     module_hotfixes: true
