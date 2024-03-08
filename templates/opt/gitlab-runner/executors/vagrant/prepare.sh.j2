@@ -27,6 +27,6 @@ echo $$ 1>&9
 vagrant box list
 
 # Create guest machine per job.
-vagrant up
+vagrant up --provider {{ vagrant_default_provider }}
 
 exit 0
