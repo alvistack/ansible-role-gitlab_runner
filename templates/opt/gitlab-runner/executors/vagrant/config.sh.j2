@@ -33,23 +33,21 @@ echo ${CI_JOB_URL} > CI_JOB_URL
 # Generate Vagrantfile for provision machine per job.
 cat > Vagrantfile <<EOF
 Vagrant.configure("2") do |config|
-{% if vagrant_default_provider | lower == 'docker' %}
-  config.vm.provider :docker do |docker|
-    docker.name = "${VM_HOSTNAME}"
-    docker.image = "{{ gitlab_runner_runners_vagrant_image }}"
-    docker.pull = {{ gitlab_runner_runners_vagrant_pull | bool | lower }}
-    docker.has_ssh = true
-  end
-
-{% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
-  config.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}"
-{% endfor %}
-{% elif vagrant_default_provider | lower == 'libvirt' %}
   config.vm.hostname = "${VM_HOSTNAME}"
   config.vm.box = "{{ gitlab_runner_runners_vagrant_box }}"
   config.vm.box_check_update = {{ gitlab_runner_runners_vagrant_box_check_update | bool | lower }}
 
-  config.vm.provider :libvirt do |libvirt|
+  config.vm.provider :docker do |docker, override|
+    docker.name = "${VM_HOSTNAME}"
+    docker.image = "{{ gitlab_runner_runners_vagrant_image }}"
+    docker.pull = {{ gitlab_runner_runners_vagrant_pull | bool | lower }}
+    docker.has_ssh = true
+{% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
+    override.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}"
+{% endfor %}
+  end
+
+  config.vm.provider :libvirt do |libvirt, override|
     libvirt.cpu_mode = "host-passthrough"
     libvirt.cpus = {{ gitlab_runner_runners_vagrant_cpus | int }}
     libvirt.disk_bus = "virtio"
@@ -65,27 +63,20 @@ Vagrant.configure("2") do |config|
     libvirt.nic_model_type = "virtio"
     libvirt.storage :file, bus: "virtio", cache: "writeback"
     libvirt.video_type = "virtio"
+{% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
+    override.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}", type: "virtiofs"
+{% endfor %}
   end
 
-{% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
-  config.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}", type: "virtiofs"
-{% endfor %}
-{% elif vagrant_default_provider | lower == 'virtualbox' %}
-  config.vm.hostname = "${VM_HOSTNAME}"
-  config.vm.box = "{{ gitlab_runner_runners_vagrant_box }}"
-  config.vm.box_check_update = {{ gitlab_runner_runners_vagrant_box_check_update | bool | lower }}
-
-  config.vm.provider :virtualbox do |virtualbox|
+  config.vm.provider :virtualbox do |virtualbox, override|
     virtualbox.cpus = {{ gitlab_runner_runners_vagrant_cpus | int }}
     virtualbox.memory = {{ gitlab_runner_runners_vagrant_memory | int }}
     virtualbox.customize ["modifyvm", :id, "--cpu-profile", "host"]
     virtualbox.customize ["modifyvm", :id, "--nested-hw-virt", "{{ gitlab_runner_runners_vagrant_nested | bool | ternary('on', 'off') }}"]
-  end
-
 {% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
-  config.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}"
+    override.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}"
 {% endfor %}
-{% endif %}
+  end
 end
 EOF
 
