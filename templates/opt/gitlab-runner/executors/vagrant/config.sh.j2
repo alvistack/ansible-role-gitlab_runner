@@ -42,6 +42,7 @@ Vagrant.configure("2") do |config|
     virtualbox.memory = {{ gitlab_runner_runners_vagrant_memory | int }}
     virtualbox.customize ["modifyvm", :id, "--cpu-profile", "host"]
     virtualbox.customize ["modifyvm", :id, "--nested-hw-virt", "{{ gitlab_runner_runners_vagrant_nested | bool | ternary('on', 'off') }}"]
+    override.vm.disk :disk, name: "sdb", size: "10GB"
 {% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
     override.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}"
 {% endfor %}
