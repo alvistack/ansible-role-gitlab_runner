@@ -70,17 +70,6 @@ Vagrant.configure("2") do |config|
     override.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}", type: "virtiofs"
 {% endfor %}
   end
-
-  config.vm.provider :docker do |docker, override|
-    docker.name = "${VM_HOSTNAME}"
-    docker.image = "{{ gitlab_runner_runners_vagrant_image }}"
-    docker.pull = {{ gitlab_runner_runners_vagrant_pull | bool | lower }}
-    docker.has_ssh = true
-
-{% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
-    override.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}"
-{% endfor %}
-  end
 end
 EOF
 
