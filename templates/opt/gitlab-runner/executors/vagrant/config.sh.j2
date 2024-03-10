@@ -37,11 +37,11 @@ Vagrant.configure("2") do |config|
   config.vm.box = "{{ gitlab_runner_runners_vagrant_box }}"
   config.vm.box_check_update = {{ gitlab_runner_runners_vagrant_box_check_update | bool | lower }}
 
-  config.vm.provider :docker do |docker, override|
-    docker.name = "${VM_HOSTNAME}"
-    docker.image = "{{ gitlab_runner_runners_vagrant_image }}"
-    docker.pull = {{ gitlab_runner_runners_vagrant_pull | bool | lower }}
-    docker.has_ssh = true
+  config.vm.provider :virtualbox do |virtualbox, override|
+    virtualbox.cpus = {{ gitlab_runner_runners_vagrant_cpus | int }}
+    virtualbox.memory = {{ gitlab_runner_runners_vagrant_memory | int }}
+    virtualbox.customize ["modifyvm", :id, "--cpu-profile", "host"]
+    virtualbox.customize ["modifyvm", :id, "--nested-hw-virt", "{{ gitlab_runner_runners_vagrant_nested | bool | ternary('on', 'off') }}"]
 {% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
     override.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}"
 {% endfor %}
@@ -68,11 +68,11 @@ Vagrant.configure("2") do |config|
 {% endfor %}
   end
 
-  config.vm.provider :virtualbox do |virtualbox, override|
-    virtualbox.cpus = {{ gitlab_runner_runners_vagrant_cpus | int }}
-    virtualbox.memory = {{ gitlab_runner_runners_vagrant_memory | int }}
-    virtualbox.customize ["modifyvm", :id, "--cpu-profile", "host"]
-    virtualbox.customize ["modifyvm", :id, "--nested-hw-virt", "{{ gitlab_runner_runners_vagrant_nested | bool | ternary('on', 'off') }}"]
+  config.vm.provider :docker do |docker, override|
+    docker.name = "${VM_HOSTNAME}"
+    docker.image = "{{ gitlab_runner_runners_vagrant_image }}"
+    docker.pull = {{ gitlab_runner_runners_vagrant_pull | bool | lower }}
+    docker.has_ssh = true
 {% for synced_folder in gitlab_runner_runners_vagrant_synced_folders %}
     override.vm.synced_folder "{{ synced_folder.src }}", "{{ synced_folder.dest }}"
 {% endfor %}
