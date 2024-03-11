@@ -11,7 +11,7 @@ vagrant global-status --prune || echo $?
 
 # Update Vagrant box images for /root/.vagrant.d.
 export VAGRANT_HOME=/root/.vagrant.d
-vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_image }} || echo $?
+vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_box }} || echo $?
 vagrant box list | while read _LINE; do
     _BOX="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\1/g')"
     _PROVIDER="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\2/g')"
@@ -24,7 +24,7 @@ unset VAGRANT_HOME
 
 # Update Vagrant box images for /home/vagrant/.vagrant.d.
 export VAGRANT_HOME=/home/vagrant/.vagrant.d
-vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_image }} || echo $?
+vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_box }} || echo $?
 vagrant box list | while read _LINE; do
     _BOX="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\1/g')"
     _PROVIDER="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\2/g')"
