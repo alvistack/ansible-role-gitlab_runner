@@ -15,26 +15,26 @@
 # limitations under the License.
 
 _apt_key:
-  - keyring: "/etc/apt/trusted.gpg.d/gitlab-runner.gpg"
-    url: "http://packages.gitlab.com/runner/gitlab-runner/gpgkey"
-    id: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
-    state: "present"
-  - keyring: "/etc/apt/trusted.gpg.d/home_alvistack.gpg"
-    url: "http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_20.04/Release.key"
-    id: "789CFFDE0295B8A1F4E5690C4BECC97550D0B1FD"
-    state: "present"
+  - keyring: /etc/apt/trusted.gpg.d/gitlab-runner.gpg
+    url: http://packages.gitlab.com/runner/gitlab-runner/gpgkey
+    id: F6403F6544A38863DAA0B6E03F01618A51312F3F
+    state: present
+  - keyring: /etc/apt/trusted.gpg.d/home_alvistack.gpg
+    url: http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_20.04/Release.key
+    id: 789CFFDE0295B8A1F4E5690C4BECC97550D0B1FD
+    state: present
 
 _apt_repository:
-  - filename: "gitlab-runner"
-    repo: "deb http://packages.gitlab.com/runner/gitlab-runner/ubuntu focal main"
-    state: "present"
-  - filename: "home:alvistack"
-    repo: "deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_20.04/ /"
-    state: "present"
+  - filename: gitlab-runner
+    repo: deb http://packages.gitlab.com/runner/gitlab-runner/ubuntu focal main
+    state: present
+  - filename: home:alvistack
+    repo: deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_20.04/ /
+    state: present
 
 _apt:
-  - { state: "latest", name: "ca-certificates" }
-  - { state: "latest", name: "gitlab-cli" }
-  - { state: "latest", name: "openssh-client" }
-  - { state: "latest", name: "python3-gitlab" }
-  - { state: "present", name: "gitlab-runner={{ gitlab_runner_version }}*" }
+  - { state: latest, name: ca-certificates }
+  - { state: latest, name: gitlab-cli }
+  - { state: latest, name: openssh-client }
+  - { state: latest, name: python3-gitlab }
+  - { state: present, name: "gitlab-runner={{ gitlab_runner_version }}*" }
