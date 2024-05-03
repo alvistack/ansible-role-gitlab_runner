@@ -26,7 +26,7 @@ _apt_key:
 
 _apt_repository:
   - filename: gitlab-runner
-    repo: deb http://packages.gitlab.com/runner/gitlab-runner/ubuntu lunar main
+    repo: deb http://packages.gitlab.com/runner/gitlab-runner/ubuntu mantic main
     state: present
   - filename: home:alvistack
     repo: deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_23.10/ /
