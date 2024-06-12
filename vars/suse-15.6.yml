@@ -19,9 +19,9 @@ _rpm_key:
     fingerprint: F6403F6544A38863DAA0B6E03F01618A51312F3F
     state: present
   - key: http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg
-    fingerprint: "09E57083F34CCA94D541BC58A674BF8135DFA027"
+    fingerprint: 09E57083F34CCA94D541BC58A674BF8135DFA027
     state: present
-  - key: http://downloadcontent.opensuse.org/repositories/home:/alvistack/Fedora_38/repodata/repomd.xml.key
+  - key: http://downloadcontent.opensuse.org/repositories/home:/alvistack/openSUSE_Leap_15.6/repodata/repomd.xml.key
     fingerprint: 789CFFDE0295B8A1F4E5690C4BECC97550D0B1FD
     state: present
 
@@ -29,7 +29,7 @@ _yum_repository:
   - file: gitlab-runner
     name: gitlab-runner
     description: GitLab Runner
-    baseurl: http://packages.gitlab.com/runner/gitlab-runner/fedora/38/x86_64
+    baseurl: http://packages.gitlab.com/runner/gitlab-runner/ol/9/x86_64
     enabled: true
     priority: "2"
     module_hotfixes: true
@@ -38,19 +38,19 @@ _yum_repository:
       - http://packages.gitlab.com/runner/gitlab-runner/gpgkey
       - http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg
     state: present
-  - file: home:alvistack
+  - file: home_alvistack
     name: home_alvistack
-    description: home:alvistack (Fedora_38)
-    baseurl: http://downloadcontent.opensuse.org/repositories/home:/alvistack/Fedora_38
+    description: home:alvistack (openSUSE_Leap_15.6)
+    baseurl: http://downloadcontent.opensuse.org/repositories/home:/alvistack/openSUSE_Leap_15.6
     enabled: true
     priority: "2"
     module_hotfixes: true
     gpgcheck: true
-    gpgkey: http://downloadcontent.opensuse.org/repositories/home:/alvistack/Fedora_38/repodata/repomd.xml.key
+    gpgkey: http://downloadcontent.opensuse.org/repositories/home:/alvistack/openSUSE_Leap_15.6/repodata/repomd.xml.key
     state: present
 
-_yum:
+_zypper:
   - { state: latest, name: ca-certificates }
-  - { state: latest, name: openssh-clients }
+  - { state: latest, name: openssh }
   - { state: latest, name: python3-gitlab }
-  - { state: present, name: "gitlab-runner-{{ gitlab_runner_version }}*" }
+  - { state: present, name: "gitlab-runner-{{ gitlab_runner_version }}" }

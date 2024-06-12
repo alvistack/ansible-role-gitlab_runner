@@ -19,7 +19,7 @@ _rpm_key:
     fingerprint: F6403F6544A38863DAA0B6E03F01618A51312F3F
     state: present
   - key: http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg
-    fingerprint: "09E57083F34CCA94D541BC58A674BF8135DFA027"
+    fingerprint: 09E57083F34CCA94D541BC58A674BF8135DFA027
     state: present
   - key: http://downloadcontent.opensuse.org/repositories/home:/alvistack/Fedora_Rawhide/repodata/repomd.xml.key
     fingerprint: 789CFFDE0295B8A1F4E5690C4BECC97550D0B1FD
