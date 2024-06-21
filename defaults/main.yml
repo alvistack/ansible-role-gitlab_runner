@@ -18,7 +18,7 @@
 vagrant_default_provider: libvirt
 
 # GitLab release.
-gitlab_runner_release: "17.0"
+gitlab_runner_release: "17.1"
 
 # GitLab Runner version.
 gitlab_runner_version: "{{ _gitlab_runner_version[gitlab_runner_release] }}"
@@ -33,7 +33,7 @@ gitlab_runner_check_interval: "0"
 
 # Each [[runners]] section defines one runner.
 gitlab_runner_runners:
-  - { name: alvistack/gitlab-runner, url: !!null "", token: !!null "" }
+  - { name: alvistack/gitlab-runner, url: "", token: "" }
 
 # Absolute path to a directory where builds are stored in the context of
 # the selected executor. For example, locally, Docker, or SSH.
