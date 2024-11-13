@@ -13,7 +13,7 @@ vagrant global-status --prune || echo $?
 export VAGRANT_HOME=/root/.vagrant.d
 vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_box }} || echo $?
 vagrant box list --machine-readable | grep box-name | while read _LINE; do
-    _BOX="$(echo $_LINE | cut -d, -f4"
+    _BOX="$(echo $_LINE | cut -d, -f4)"
     vagrant box add --provider {{ vagrant_default_provider }} $_BOX || echo $?
 done
 vagrant box prune --force --keep-active-boxes || echo $?
@@ -25,7 +25,7 @@ unset VAGRANT_HOME
 export VAGRANT_HOME=/home/vagrant/.vagrant.d
 vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_box }} || echo $?
 vagrant box list --machine-readable | grep box-name | while read _LINE; do
-    _BOX="$(echo $_LINE | cut -d, -f4"
+    _BOX="$(echo $_LINE | cut -d, -f4)"
     vagrant box add --provider {{ vagrant_default_provider }} $_BOX || echo $?
 done
 vagrant box prune --force --keep-active-boxes || echo $?
