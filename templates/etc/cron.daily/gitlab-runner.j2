@@ -12,10 +12,8 @@ vagrant global-status --prune || echo $?
 # Update Vagrant box images for /root/.vagrant.d.
 export VAGRANT_HOME=/root/.vagrant.d
 vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_box }} || echo $?
-vagrant box list | while read _LINE; do
-    _BOX="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\1/g')"
-    _PROVIDER="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\2/g')"
-    vagrant box add --provider $_PROVIDER $_BOX || echo $?
+vagrant box list --machine-readable | grep box-name | cut -d, -f4 | sort -u | while read _BOX; do
+    vagrant box add --provider {{ vagrant_default_provider }} $_BOX || echo $?
 done
 vagrant box prune --force --keep-active-boxes || echo $?
 find $VAGRANT_HOME/boxes -type f -empty -exec rm -rf {} \; || echo $?
@@ -25,10 +23,8 @@ unset VAGRANT_HOME
 # Update Vagrant box images for /home/vagrant/.vagrant.d.
 export VAGRANT_HOME=/home/vagrant/.vagrant.d
 vagrant box add --provider {{ vagrant_default_provider }} {{ gitlab_runner_runners_vagrant_box }} || echo $?
-vagrant box list | while read _LINE; do
-    _BOX="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\1/g')"
-    _PROVIDER="$(echo $_LINE | sed 's/^\(.*\)\s*(\(.*\),\s*\(.*\))/\2/g')"
-    vagrant box add --provider $_PROVIDER $_BOX || echo $?
+vagrant box list --machine-readable | grep box-name | cut -d, -f4 | sort -u | while read _BOX; do
+    vagrant box add --provider {{ vagrant_default_provider }} $_BOX || echo $?
 done
 vagrant box prune --force --keep-active-boxes || echo $?
 find $VAGRANT_HOME/boxes -type f -empty -exec rm -rf {} \; || echo $?
