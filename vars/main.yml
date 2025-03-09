@@ -15,5 +15,5 @@
 # limitations under the License.
 
 _gitlab_runner_version:
-  "17.9": 17.9.0
+  "17.9": 17.9.1
   "17.8": 17.8.3
