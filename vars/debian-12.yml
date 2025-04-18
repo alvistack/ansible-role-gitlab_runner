@@ -45,4 +45,5 @@ _apt:
   - { state: latest, name: gitlab-cli }
   - { state: latest, name: openssh-client }
   - { state: latest, name: python3-gitlab }
+  - { state: present, name: "gitlab-runner-helper-images={{ gitlab_runner_version }}*" }
   - { state: present, name: "gitlab-runner={{ gitlab_runner_version }}*" }
