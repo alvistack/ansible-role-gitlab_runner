@@ -60,6 +60,7 @@ Vagrant.configure("2") do |config|
     libvirt.management_network_address = "{{ gitlab_runner_runners_vagrant_management_network_address }}"
     libvirt.management_network_name = "{{ gitlab_runner_runners_vagrant_management_network_name }}"
     libvirt.memory = {{ gitlab_runner_runners_vagrant_memory | int }}
+    libvirt.memorybacking :source, :type => "memfd"
     libvirt.memorybacking :access, :mode => "shared"
     libvirt.nested = {{ gitlab_runner_runners_vagrant_nested | bool | lower }}
     libvirt.nic_model_type = "virtio"
