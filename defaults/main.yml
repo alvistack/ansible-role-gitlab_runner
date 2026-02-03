@@ -18,7 +18,7 @@
 vagrant_default_provider: libvirt
 
 # GitLab release.
-gitlab_runner_release: "18.7"
+gitlab_runner_release: "18.8"
 
 # GitLab Runner version.
 gitlab_runner_version: "{{ _gitlab_runner_version[gitlab_runner_release] }}"
@@ -66,6 +66,10 @@ gitlab_runner_runners_vagrant_management_network_name: gitlab-runner
 # Address of network to which all VMs will be connected. Must include
 # the address and subnet mask.
 gitlab_runner_runners_vagrant_management_network_address: 172.16.121.0/24
+
+# Sets the IP for the display protocol to bind to. Defaults to
+# "127.0.0.1".
+gitlab_runner_runners_vagrant_graphics_ip: 127.0.0.1
 
 # Specify additional volumes that should be mounted.
 gitlab_runner_runners_vagrant_synced_folders:

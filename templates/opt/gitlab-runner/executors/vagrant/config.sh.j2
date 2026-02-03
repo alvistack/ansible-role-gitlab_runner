@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|
     libvirt.disk_bus = "virtio"
     libvirt.disk_driver :cache => "writeback"
     libvirt.driver = "kvm"
-    libvirt.graphics_ip = "{{ ansible_default_ipv4.address }}"
+    libvirt.graphics_ip = "{{ gitlab_runner_runners_vagrant_graphics_ip }}"
     libvirt.graphics_type = "vnc"
     libvirt.management_network_address = "{{ gitlab_runner_runners_vagrant_management_network_address }}"
     libvirt.management_network_name = "{{ gitlab_runner_runners_vagrant_management_network_name }}"
