@@ -15,11 +15,14 @@
 # limitations under the License.
 
 _rpm_key:
-  - key: http://packages.gitlab.com/runner/gitlab-runner/gpgkey
+  - key: https://packages.gitlab.com/runner/gitlab-runner/gpgkey
     fingerprint: F6403F6544A38863DAA0B6E03F01618A51312F3F
     state: present
-  - key: http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg
+  - key: https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg
     fingerprint: 09E57083F34CCA94D541BC58A674BF8135DFA027
+    state: present
+  - key: https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-49F16C5CC3A0F81F.pub.gpg
+    fingerprint: 931DA69CFA3AFEBBC97DAA8C6C57C29C6BA75A4E
     state: present
   - key: https://download.opensuse.org/repositories/home:/alvistack/openSUSE_Tumbleweed/repodata/repomd.xml.key
     fingerprint: 789CFFDE0295B8A1F4E5690C4BECC97550D0B1FD
@@ -29,14 +32,15 @@ _yum_repository:
   - file: gitlab-runner
     name: gitlab-runner
     description: GitLab Runner
-    baseurl: http://packages.gitlab.com/runner/gitlab-runner/ol/9/x86_64
+    baseurl: https://packages.gitlab.com/runner/gitlab-runner/ol/9/x86_64
     enabled: true
     priority: "2"
     module_hotfixes: true
     gpgcheck: true
     gpgkey:
-      - http://packages.gitlab.com/runner/gitlab-runner/gpgkey
-      - http://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg
+      - https://packages.gitlab.com/runner/gitlab-runner/gpgkey
+      - https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg
+      - https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-49F16C5CC3A0F81F.pub.gpg
     state: present
   - file: home_alvistack
     name: home_alvistack
