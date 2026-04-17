@@ -24,7 +24,7 @@ _rpm_key:
   - key: https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-49F16C5CC3A0F81F.pub.gpg
     fingerprint: 931DA69CFA3AFEBBC97DAA8C6C57C29C6BA75A4E
     state: present
-  - key: https://download.opensuse.org/repositories/home:/alvistack/Fedora_Rawhide/repodata/repomd.xml.key
+  - key: https://downloadcontent.opensuse.org/repositories/home:/alvistack/Fedora_Rawhide/repodata/repomd.xml.key
     fingerprint: 789CFFDE0295B8A1F4E5690C4BECC97550D0B1FD
     state: present
 
@@ -45,12 +45,12 @@ _yum_repository:
   - file: home:alvistack
     name: home_alvistack
     description: home:alvistack (Fedora_Rawhide)
-    baseurl: https://download.opensuse.org/repositories/home:/alvistack/Fedora_Rawhide
+    baseurl: https://downloadcontent.opensuse.org/repositories/home:/alvistack/Fedora_Rawhide
     enabled: true
     priority: "2"
     module_hotfixes: true
     gpgcheck: true
-    gpgkey: https://download.opensuse.org/repositories/home:/alvistack/Fedora_Rawhide/repodata/repomd.xml.key
+    gpgkey: https://downloadcontent.opensuse.org/repositories/home:/alvistack/Fedora_Rawhide/repodata/repomd.xml.key
     state: present
 
 _yum:
