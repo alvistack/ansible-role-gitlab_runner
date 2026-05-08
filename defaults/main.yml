@@ -21,7 +21,7 @@ vagrant_default_provider: libvirt
 gitlab_runner_release: "18.11"
 
 # GitLab Runner version.
-gitlab_runner_version: "{{ _gitlab_runner_version[gitlab_runner_release] }}"
+gitlab_runner_version: "{{ _gitlab_runner_version }}"
 
 # Limits how many jobs globally can be run concurrently. The most upper limit
 # of jobs using all defined runners. 0 does not mean unlimited.
