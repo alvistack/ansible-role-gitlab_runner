@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-_gitlab_runner_version:
-  "18.11": 18.11.0
+_gitlab_runner_version: "{{ __gitlab_runner_version[gitlab_runner_release] }}"
+__gitlab_runner_version:
+  "18.11": 18.11.2
   "18.10": 18.10.1
