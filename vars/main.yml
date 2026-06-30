@@ -17,4 +17,4 @@
 _gitlab_runner_version: "{{ __gitlab_runner_version[gitlab_runner_release] }}"
 __gitlab_runner_version:
   "19.1": 19.1.1
-  "19.0": 19.0.1
+  "19.0": 19.0.2
